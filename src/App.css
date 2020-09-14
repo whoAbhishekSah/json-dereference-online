@@ -10,3 +10,27 @@
   flex-direction: column;
   padding: 30px;
 }
+
+.CodeMirror {
+  font-size: 1em;
+  height: 100%;
+  z-index: 2;
+  padding: 4px;
+}
+.react-codemirror2 {
+  height: 100%;
+  overflow: hidden;
+  scrollbar-color: #546E7A transparent;
+  scrollbar-width: thin;
+  width: 100%;
+  margin: 20px auto;
+}
+.react-codemirror2::-webkit-scrollbar {
+  width: 0.5em;
+}
+.react-codemirror2::-webkit-scrollbar-track {
+  background: transparent;
+}
+.react-codemirror2::-webkit-scrollbar-thumb {
+  background-color: #546E7A;
+}

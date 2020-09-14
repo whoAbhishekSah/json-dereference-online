@@ -1,9 +1,29 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-import "./App.css"
+import "./App.css";
 import deref from "json-schema-deref";
+import { Controlled as CodeMirror } from "react-codemirror2";
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/material.css";
+import "codemirror/mode/javascript/javascript";
+
 const { TextArea } = Input;
 
+const OuputEditor = ({ onChange, value }) => {
+  return (
+    <CodeMirror
+      value={value}
+      options={{
+        mode: "javascript",
+        theme: "material",
+        lineNumbers: true,
+        lineWrapping: true,
+        tabSize: 2
+      }}
+      onChange={(editor, data, value) => onChange(value)}
+    />
+  );
+};
 const InputForm = () => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
@@ -44,21 +64,18 @@ const InputForm = () => {
             >
               <TextArea
                 rows={30}
-                style={{ width:"100%", overflowY: "scroll", resize: "none" }}
+                style={{ width: "100%", overflowY: "scroll", resize: "none" }}
               />
             </Form.Item>
           </React.Fragment>
         </div>
         <div className="container_col">
           <Form.Item label="Output schema" name="output">
-            <TextArea
-              rows={30}
-              style={{ width:"100%", overflowY: "scroll", resize: "none" }}
-            />
+            <OuputEditor />
           </Form.Item>
         </div>
       </div>
-      <Form.Item style={{textAlign: "center"}}>
+      <Form.Item style={{ textAlign: "center" }}>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
