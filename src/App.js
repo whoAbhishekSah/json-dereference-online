@@ -1,23 +1,8 @@
 import React from "react";
-import { Form, Input, Button, Row, Col } from "antd";
+import { Form, Input, Button } from "antd";
+import "./App.css"
 import deref from "json-schema-deref";
-import "./App.css";
 const { TextArea } = Input;
-
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
 
 const InputForm = () => {
   const [form] = Form.useForm();
@@ -26,8 +11,7 @@ const InputForm = () => {
     let inputSchema = JSON.parse(values.schema.replace(/\n/g, ""));
     deref(inputSchema, function (err, fullSchema) {
       console.dir(fullSchema);
-      form.setFieldsValue({output: JSON.stringify(fullSchema)})
-
+      form.setFieldsValue({ output: JSON.stringify(fullSchema) });
     });
   };
 
@@ -37,7 +21,6 @@ const InputForm = () => {
 
   return (
     <Form
-      {...layout}
       name="basic"
       form={form}
       initialValues={{
@@ -46,31 +29,39 @@ const InputForm = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <Form.Item
-        label="Schema"
-        name="schema"
-        rules={[
-          {
-            required: true,
-            message: "Please input your schema!",
-          },
-        ]}
-      >
-        <TextArea
-          rows={30}
-          style={{ width: "40%", overflowY: "scroll", resize: "none" }}
-        />
-      </Form.Item>
-      <Form.Item {...tailLayout}>
+      <div className="container">
+        <div className="container_col">
+          <React.Fragment>
+            <Form.Item
+              label="Schema"
+              name="schema"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your schema!",
+                },
+              ]}
+            >
+              <TextArea
+                rows={30}
+                style={{ width:"100%", overflowY: "scroll", resize: "none" }}
+              />
+            </Form.Item>
+          </React.Fragment>
+        </div>
+        <div className="container_col">
+          <Form.Item label="Output schema" name="output">
+            <TextArea
+              rows={30}
+              style={{ width:"100%", overflowY: "scroll", resize: "none" }}
+            />
+          </Form.Item>
+        </div>
+      </div>
+      <Form.Item style={{textAlign: "center"}}>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
-      </Form.Item>
-      <Form.Item
-        label="Output schema"
-        name="output"
-      >
-        <TextArea rows={30} style={{ width: "40%", overflowY: "scroll", resize: "none" }} />
       </Form.Item>
     </Form>
   );
