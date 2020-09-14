@@ -1,21 +1,36 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
-import "./App.css"
+import { Form, Input, Button, message } from "antd";
+import "./App.css";
 import deref from "json-schema-deref";
 const { TextArea } = Input;
+
+const info = (txt) => {
+  message.info(txt);
+};
 
 const InputForm = () => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log("Success:");
-    let inputSchema = JSON.parse(values.schema.replace(/\n/g, ""));
-    deref(inputSchema, function (err, fullSchema) {
-      console.dir(fullSchema);
-      form.setFieldsValue({ output: JSON.stringify(fullSchema) });
-    });
+    try {
+      let inputSchema = JSON.parse(values.schema.replace(/\n/g, ""));
+      deref(inputSchema, function (err, fullSchema) {
+        if (err) {
+          info(`Failure : ${err.message}`);
+          console.log("Error Occured");
+          return;
+        }
+        info(`Sucessfully dereferenced`);
+        console.dir(fullSchema);
+        form.setFieldsValue({ output: JSON.stringify(fullSchema) });
+      });
+    } catch (e) {
+      info(`Failure : ${e.message}`);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
+    info("Failure", errorInfo);
     console.log("Failed:", errorInfo);
   };
 
@@ -44,7 +59,7 @@ const InputForm = () => {
             >
               <TextArea
                 rows={30}
-                style={{ width:"100%", overflowY: "scroll", resize: "none" }}
+                style={{ width: "100%", overflowY: "scroll", resize: "none" }}
               />
             </Form.Item>
           </React.Fragment>
@@ -53,12 +68,12 @@ const InputForm = () => {
           <Form.Item label="Output schema" name="output">
             <TextArea
               rows={30}
-              style={{ width:"100%", overflowY: "scroll", resize: "none" }}
+              style={{ width: "100%", overflowY: "scroll", resize: "none" }}
             />
           </Form.Item>
         </div>
       </div>
-      <Form.Item style={{textAlign: "center"}}>
+      <Form.Item style={{ textAlign: "center" }}>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
