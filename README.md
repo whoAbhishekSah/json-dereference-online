@@ -26,3 +26,70 @@ Derefence your JSON schema on the fly. [Try now!](https://fcmtest1-2ba38.web.app
 - What tools does this app use?
   - This app uses the [json-schema-deref](https://github.com/cvent/json-schema-deref) to perform the said job.
 
+
+##### Sample input to try !
+
+```json
+{
+  "paths": {
+    "/class_definitions": {
+      "get": {
+        "description": "Get all class definitions",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Class Definitions"
+        ],
+        "summary": "Get class definitions",
+        "operationId": "get-class-definitions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ClassDefinition"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClassDefinition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "updated_by": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "creator_team": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+```
