@@ -1,6 +1,6 @@
 # JSON-dereference-online
 
-Derefence your JSON schema on the fly. [Try now!](https://fcmtest1-2ba38.web.app)
+Derefence your JSON schema on the fly. App is live. [Try now 🚀](https://fcmtest1-2ba38.web.app)
 
 ### Build Instructions:
 
