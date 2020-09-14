@@ -24,5 +24,5 @@ Derefence your JSON schema on the fly
   - No, this app doesn't store or sell your personal data in any way. (Or send to a server in N.Korea/China for that matter)
 
 - What tools does this app use?
-  - This app uses the [json-schema-deref](https://github.com/cvent/json-schema-deref) to perform the said job. This app is a dumb wrapper around thi
+  - This app uses the [json-schema-deref](https://github.com/cvent/json-schema-deref) to perform the said job.
 
